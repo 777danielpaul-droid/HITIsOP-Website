@@ -13,10 +13,10 @@ export default function ArcadeButton({ children, onClick }) {
         font-black
         uppercase
         tracking-widest
-        text-tiffany
+        text-[#00f3ff]
         bg-transparent
         border-2
-        border-[#00f3ff]
+        border-[#9400d3]
         cursor-pointer
         transition-all
         duration-100
@@ -26,16 +26,16 @@ export default function ArcadeButton({ children, onClick }) {
         /* Schräger Basis-Schnitt */
         transform -skew-x-12
         
-        /* Start-Schatten (Lila) */
-        box-shadow-[4px_4px_0px_#9400d3]
+        /* Start-Schatten (Türkis für den Kontrast zum lila Rahmen) */
+        box-shadow-[4px_4px_0px_#00f3ff]
         
-        /* UNSER NEUER HOVER-GLITCH AUS DER CSS-DATEI */
+        /* UNSER HOVER-GLITCH AUS DER CSS-DATEI */
         btn-hover-glitch
         
         /* Active / Klick-Effekt */
         active:translate-x-[4px]
         active:translate-y-[4px]
-        active:box-shadow-[0px_0px_0px_transparent]
+        active:shadow-none
       "
     >
       {/* Der Text wird im Button wieder gerade gerückt */}
