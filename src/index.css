@@ -547,3 +547,100 @@
   filter: drop-shadow(0 0 4px #9400d3);
   opacity: 0.3; /* Schön dezent im Hintergrund */
 }
+/* --------------------------------------------------
+   PERMANENTES HINTERGRUND-FLIMMERN (SKY AMBIENT)
+-------------------------------------------------- */
+.ambient-sky-flicker {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Liegt genau über dem Schwarz, blendet sich in die Deckkraft ein */
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(148, 0, 211, 0.12) 0%,
+    rgba(0, 243, 255, 0.05) 50%,
+    transparent 100%
+  );
+  animation: skyFlicker 4s infinite linear;
+}
+
+@keyframes skyFlicker {
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: brightness(1);
+  }
+  7% {
+    opacity: 0.4;
+    filter: brightness(1.1);
+  }
+  9% {
+    opacity: 0.9;
+    filter: brightness(1.6);
+  } /* Kurzer Peak */
+  11% {
+    opacity: 0.3;
+    filter: brightness(0.9);
+  }
+  13% {
+    opacity: 0.7;
+    filter: brightness(1.3);
+  } /* Doppel-Zucken */
+  15% {
+    opacity: 0.4;
+    filter: brightness(1);
+  }
+  45% {
+    opacity: 0.3;
+  }
+  47% {
+    opacity: 0.8;
+    filter: brightness(1.5);
+  } /* Zweiter kleinerer Wetterleuchten-Peak */
+  49% {
+    opacity: 0.4;
+  }
+  51% {
+    opacity: 0.6;
+  }
+  53% {
+    opacity: 0.3;
+  }
+}
+
+/* --------------------------------------------------
+   DIGITALER REGEN-EFFEKT (TÜRKIS & TRANSPARENT-LILA)
+-------------------------------------------------- */
+@keyframes cyberRain {
+  0% {
+    transform: translateY(-380px);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
+}
+
+/* Gemeinsame Basis für alle Tropfen */
+.rain-drop {
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 370px;
+  animation: cyberRain infinite linear;
+}
+
+/* Spezifisch für die originalen blauen Tropfen */
+.rain-tiffany {
+  background: linear-gradient(to bottom, rgba(0, 243, 255, 0) 0%, #00f3ff 100%);
+  filter: drop-shadow(0 0 5px #00f3ff);
+  opacity: 0.6;
+}
+
+/* Spezifisch für die neuen lila Tropfen */
+.rain-purple {
+  background: linear-gradient(to bottom, rgba(148, 0, 211, 0) 0%, #9400d3 100%);
+  filter: drop-shadow(0 0 4px #9400d3);
+  opacity: 0.3;
+}

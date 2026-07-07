@@ -6,7 +6,10 @@ export default function App() {
       {/* 1. CRT Scanlines Röhren-Effekt */}
       <div className="crt-scanlines" />
 
-      {/* NEU: Cyberpunk-Doppelregen Container (Sicher getrennt) */}
+      {/* NEU: Das permanente Umgebungs-Flimmern im tiefen Hintergrund */}
+      <div className="ambient-sky-flicker" />
+
+      {/* Cyberpunk-Doppelregen Container (Perfekt synchronisiert) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-5">
         {/* Ebene 1: Deine originalen 8 blauen Tropfen */}
         <div
@@ -148,7 +151,6 @@ export default function App() {
           alt="Arcade Background"
           className="w-full h-full object-cover opacity-60"
         />
-        {/* Dunkler Neon-Verlauf direkt über dem Bild für bessere Lesbarkeit */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#9400d3]/30 via-transparent to-[#05010c]/90" />
       </div>
 
@@ -213,7 +215,7 @@ export default function App() {
       </main>
 
       {/* 6. Social Media Footer-Leiste mit dynamischem Hover-Pop (50% -> 100%) */}
-      <footer className="relative z-10 mt-auto pt-12 pb-4 flex flex-wrap justify-center gap-4 select-none">
+      <footer className="relative z-10 mt-auto pt-12 pb-4 flex flex-wrap justify-center gap-37 select-none">
         {/* YouTube Icon */}
         <a
           href="https://youtube.com/@deinkanal"
