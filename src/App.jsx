@@ -143,7 +143,127 @@ export default function App() {
           }}
         />
       </div>
+      {/* ======================================================================= */}
+      {/* UPDATE: JAPANISCHER CODE-REGEN (BÜNDIG AM RECHTEN & LINKEN RAND)      */}
+      {/* ======================================================================= */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-5 font-dotgothic select-none">
+        {/* --- LINKE SEITE (Ganz an den Rand gedrückt) --- */}
+        {/* Spalte 1: Jetzt auf 0% – klebt direkt an der linken Kante */}
+        <div
+          className="matrix-column matrix-tiffany text-lg"
+          style={{ left: "0%", animationDuration: "4s", animationDelay: "0s" }}
+        >
+          <span>シ</span>
+          <span>ス</span>
+          <span>テ</span>
+          <span>ム</span>
+          <span>オ</span>
+          <span>ー</span>
+          <span>バ</span>
+          <span>ー</span>
+          <span>ロ</span>
+          <span>ー</span>
+          <span>ド</span>
+        </div>
 
+        {/* Spalte 2: Dicht dahinter auf 3% */}
+        <div
+          className="matrix-column matrix-purple text-3xl"
+          style={{
+            left: "3%",
+            animationDuration: "6.5s",
+            animationDelay: "2s",
+          }}
+        >
+          <span>攻</span>
+          <span>撃</span>
+          <span>デ</span>
+          <span>ジ</span>
+          <span>タ</span>
+          <span>ル</span>
+          <span>ラ</span>
+          <span>イ</span>
+          <span>ズ</span>
+        </div>
+
+        {/* Spalte 3: Auf 6% für ein kompaktes Rand-Paket */}
+        <div
+          className="matrix-column matrix-tiffany text-xs"
+          style={{
+            left: "6%",
+            animationDuration: "3.2s",
+            animationDelay: "0.8s",
+          }}
+        >
+          <span>ネ</span>
+          <span>オ</span>
+          <span>ト</span>
+          <span>ウ</span>
+          <span>キ</span>
+          <span>ョ</span>
+          <span>ウ</span>
+          <span>街</span>
+          <span>区</span>
+        </div>
+
+        {/* --- RECHTE SEITE (Ganz an den Rand gedrückt) --- */}
+        {/* Spalte 4: Jetzt auf 0% – klebt direkt an der rechten Kante */}
+        <div
+          className="matrix-column matrix-purple text-base"
+          style={{
+            right: "0%",
+            animationDuration: "5s",
+            animationDelay: "0.4s",
+          }}
+        >
+          <span>エ</span>
+          <span>ナ</span>
+          <span>ジ</span>
+          <span>ー</span>
+          <span>マ</span>
+          <span>ッ</span>
+          <span>ク</span>
+          <span>ス</span>
+        </div>
+
+        {/* Spalte 5: Dicht dahinter auf 3% */}
+        <div
+          className="matrix-column matrix-tiffany text-3xl"
+          style={{
+            right: "3%",
+            animationDuration: "7.5s",
+            animationDelay: "3.5s",
+          }}
+        >
+          <span>終</span>
+          <span>了</span>
+          <span>コ</span>
+          <span>ー</span>
+          <span>ド</span>
+          <span>コ</span>
+          <span>ア</span>
+        </div>
+
+        {/* Spalte 6: Auf 6% */}
+        <div
+          className="matrix-column matrix-purple text-sm"
+          style={{
+            right: "6%",
+            animationDuration: "4.2s",
+            animationDelay: "1.7s",
+          }}
+        >
+          <span>サ</span>
+          <span>イ</span>
+          <span>バ</span>
+          <span>ー</span>
+          <span>パ</span>
+          <span>ン</span>
+          <span>ク</span>
+          <span>世</span>
+          <span>代</span>
+        </div>
+      </div>
       {/* 2. Hintergrund-Container mit dem synchronisierten Glitch-Bild */}
       <div className="glitch-bg absolute inset-0 w-full h-full pointer-events-none z-1">
         <img

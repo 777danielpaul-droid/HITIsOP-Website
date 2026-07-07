@@ -647,3 +647,68 @@
   filter: drop-shadow(0 0 4px #9400d3);
   opacity: 0.3;
 }
+/* --------------------------------------------------
+   JAPANISCHER CYBER-MATRIX-REGEN (SEITEN-SYSTEM)
+-------------------------------------------------- */
+@keyframes matrixFall {
+  0% {
+    /* Startet komplett unsichtbar weit über dem oberen Bildschirmrand */
+    transform: translateY(-120%) scale(0.8);
+  }
+  50% {
+    /* Verändert mitten im Flug unvorhersehbar die Größe für den Glitch-Vibe */
+    transform: translateY(40vh) scale(1.2);
+  }
+  100% {
+    transform: translateY(115vh) scale(0.9);
+  }
+}
+
+@keyframes matrixGhostBlink {
+  0%,
+  100% {
+    opacity: 0;
+    filter: brightness(0.5) blur(1px);
+  }
+  25% {
+    opacity: 0.7; /* WIE GEFORDERT: Maximal 70% Sichtbarkeit im Peak */
+    filter: brightness(1.5) blur(0px);
+    text-shadow:
+      0 0 12px currentColor,
+      0 0 25px currentColor;
+  }
+  50% {
+    opacity: 0.1; /* Sackt ab zu einem schemenhaften Geist (Ghost-Effect) */
+    filter: brightness(0.8) blur(2px);
+  }
+  75% {
+    opacity: 0.6; /* Atmet noch einmal kurz auf bevor er stirbt */
+    filter: brightness(1.2) blur(0px);
+    text-shadow: 0 0 8px currentColor;
+  }
+}
+
+/* Grund-Setup der Buchstabenspalten */
+.matrix-column {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: 4px;
+  /* Beide Animationen laufen asynchron nebeneinander her */
+  animation:
+    matrixFall infinite linear,
+    matrixGhostBlink infinite ease-in-out;
+}
+
+/* Farbzuweisungen mit automatischer Anpassung für Text-Glows */
+.matrix-tiffany {
+  color: var(--tiffany); /* Nutzt dein Neon-Türkis */
+}
+
+.matrix-purple {
+  color: var(--purple); /* Nutzt dein Arcade-Lila */
+}
