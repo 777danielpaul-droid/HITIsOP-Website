@@ -6,10 +6,11 @@ export default function App() {
       {/* 1. CRT Scanlines Röhren-Effekt */}
       <div className="crt-scanlines" />
 
-      {/* FIXED: Cyberpunk-Regen Container */}
+      {/* NEU: Cyberpunk-Doppelregen Container (Sicher getrennt) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-5">
+        {/* Ebene 1: Deine originalen 8 blauen Tropfen */}
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "5%",
             animationDelay: "0s",
@@ -17,7 +18,7 @@ export default function App() {
           }}
         />
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "15%",
             animationDelay: "0.4s",
@@ -25,7 +26,7 @@ export default function App() {
           }}
         />
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "30%",
             animationDelay: "0.2s",
@@ -33,7 +34,7 @@ export default function App() {
           }}
         />
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "45%",
             animationDelay: "0.7s",
@@ -41,7 +42,7 @@ export default function App() {
           }}
         />
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "60%",
             animationDelay: "0.1s",
@@ -49,7 +50,7 @@ export default function App() {
           }}
         />
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "75%",
             animationDelay: "0.5s",
@@ -57,7 +58,7 @@ export default function App() {
           }}
         />
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "88%",
             animationDelay: "0.3s",
@@ -65,11 +66,77 @@ export default function App() {
           }}
         />
         <div
-          className="rain-drop"
+          className="rain-drop rain-tiffany"
           style={{
             left: "95%",
             animationDelay: "0.6s",
             animationDuration: "1.0s",
+          }}
+        />
+
+        {/* Ebene 2: 8 zusätzliche, versetzte lila Tropfen */}
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "10%",
+            animationDelay: "0.2s",
+            animationDuration: "1.1s",
+          }}
+        />
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "22%",
+            animationDelay: "0.6s",
+            animationDuration: "0.8s",
+          }}
+        />
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "38%",
+            animationDelay: "0.1s",
+            animationDuration: "1.3s",
+          }}
+        />
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "52%",
+            animationDelay: "0.5s",
+            animationDuration: "0.9s",
+          }}
+        />
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "68%",
+            animationDelay: "0.3s",
+            animationDuration: "1.2s",
+          }}
+        />
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "80%",
+            animationDelay: "0.7s",
+            animationDuration: "1.0s",
+          }}
+        />
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "91%",
+            animationDelay: "0.0s",
+            animationDuration: "1.4s",
+          }}
+        />
+        <div
+          className="rain-drop rain-purple"
+          style={{
+            left: "97%",
+            animationDelay: "0.4s",
+            animationDuration: "0.7s",
           }}
         />
       </div>
@@ -139,7 +206,7 @@ export default function App() {
       </header>
 
       {/* 5. Buttons / Hauptinhalt */}
-      <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-77">
+      <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-87">
         <ArcadeButton>Story-Mode</ArcadeButton>
         <ArcadeButton>2P-Mode</ArcadeButton>
         <ArcadeButton>Options</ArcadeButton>

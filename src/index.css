@@ -513,24 +513,37 @@
   }
 }
 /* --------------------------------------------------
-   DIGITALER REGEN-EFFEKT (FIXED)
+   DIGITALER REGEN-EFFEKT (TÜRKIS & TRANSPARENT-LILA)
 -------------------------------------------------- */
 @keyframes cyberRain {
   0% {
-    transform: translateY(-150px);
+    /* Angepasst auf -380px, damit die langen Tropfen flüssig von oben reinkommen */
+    transform: translateY(-380px);
   }
   100% {
     transform: translateY(110vh);
   }
 }
 
+/* Gemeinsame Basis für alle Tropfen (Länge und Speed aus deinem Code) */
 .rain-drop {
   position: absolute;
   top: 0;
-  width: 3px; /* Etwas dicker für bessere Sichtbarkeit */
-  height: 370px; /* Längere Tropfen für Highspeed-Gefühl */
+  width: 3px;
+  height: 370px;
+  animation: cyberRain infinite linear;
+}
+
+/* Spezifisch für die originalen blauen Tropfen (Exakt deine Werte!) */
+.rain-tiffany {
   background: linear-gradient(to bottom, rgba(0, 243, 255, 0) 0%, #00f3ff 100%);
   filter: drop-shadow(0 0 5px #00f3ff);
-  opacity: 0.6; /* Deutlich sichtbarer als vorher */
-  animation: cyberRain infinite linear;
+  opacity: 0.6;
+}
+
+/* Spezifisch für die neuen lila Tropfen (Transparenter eingestellt auf 0.3) */
+.rain-purple {
+  background: linear-gradient(to bottom, rgba(148, 0, 211, 0) 0%, #9400d3 100%);
+  filter: drop-shadow(0 0 4px #9400d3);
+  opacity: 0.3; /* Schön dezent im Hintergrund */
 }
