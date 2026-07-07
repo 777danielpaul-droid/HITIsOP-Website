@@ -1,0 +1,431 @@
+@import "tailwindcss";
+
+@theme {
+  --color-purple-arcade: #9400d3;
+  --color-ultraviolet: #4b0082;
+  --color-tiffany: #00f3ff;
+  --color-neon-pink: #ff007f;
+  --color-bg-dark: #05010c;
+
+  --font-audiowide: "Audiowide", sans-serif;
+  --font-dotgothic: "DotGothic16", sans-serif;
+}
+
+:root {
+  --purple: #9400d3;
+  --ultraviolet: #4b0082;
+  --tiffany: #00f3ff;
+  --neon-pink: #ff007f;
+}
+
+/* CRT Röhren-Scanlines */
+.crt-scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Master-Synchronisierte Glitch-Animation für den Bild-Hintergrund */
+.glitch-bg {
+  animation: globalGlitchSync 9s infinite linear !important;
+}
+
+/* Performance-Kanal für den Text-Glitch inklusive Farb-Verzerrungs-Filter */
+.glitch-text-wrapper {
+  will-change: transform, filter;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation: globalTextGlitchSync 9s infinite linear !important;
+}
+
+/* MASTER HINTERGRUND GLITCH (Sofortige Reaktion ab 8.0%) */
+@keyframes globalGlitchSync {
+  0%,
+  7.9% {
+    transform: translate(0, 0) skewX(0deg) scale(1);
+    filter: hue-rotate(0deg) contrast(1) brightness(1);
+  }
+  8% {
+    transform: translate(15px, -8px) skewX(9deg) scale(1.04);
+    filter: hue-rotate(90deg) contrast(2.5) brightness(1.7);
+  }
+  8.7% {
+    transform: translate(-2px, 2px) skewX(1deg) scale(1.01);
+    filter: hue-rotate(10deg) contrast(1.2) brightness(1.1);
+  }
+  9.4% {
+    transform: translate(-12px, 5px) skewX(-6deg) scale(1.03);
+    filter: hue-rotate(180deg) contrast(2.2) brightness(1.5);
+  }
+  10.1% {
+    transform: translate(2px, -1px) skewX(0deg);
+    filter: hue-rotate(20deg) contrast(1.1);
+  }
+  10.8% {
+    transform: translate(8px, 10px) skewX(4deg) scale(1.03);
+    filter: hue-rotate(45deg) contrast(2) brightness(1.6);
+  }
+  11.5% {
+    transform: translate(0, 0);
+    filter: none;
+  }
+  12.2% {
+    transform: translate(-4px, -2px) skewX(-2deg) scale(1.01);
+    filter: hue-rotate(-30deg) contrast(1.4) brightness(1.2);
+  }
+  13.6% {
+    transform: translate(1px, -1px);
+    filter: contrast(1.1);
+  }
+  15% {
+    transform: translate(3px, 1px) skewX(1deg);
+    filter: contrast(1.3) brightness(1.2);
+  }
+
+  18%,
+  54.3% {
+    transform: translate(0, 0) skewX(0deg) scale(1);
+    filter: hue-rotate(0deg) contrast(1) brightness(1);
+  }
+  /* Nebenblitz (um 0.6% vorgezogen gegen Render-Lag) */
+  54.4% {
+    transform: translate(-15px, 6px) skewX(-8deg) scale(1.03);
+    filter: hue-rotate(-90deg) contrast(2.2) brightness(1.5);
+  }
+  55.1% {
+    transform: translate(1px, -1px);
+    filter: none;
+  }
+  55.8% {
+    transform: translate(10px, -5px) skewX(5deg) scale(1.02);
+    filter: hue-rotate(-180deg) contrast(1.8) brightness(1.4);
+  }
+  56.5% {
+    transform: translate(-1px, 2px);
+    filter: contrast(1.1);
+  }
+  57.2% {
+    transform: translate(-6px, 4px) skewX(-3deg) scale(1.02);
+    filter: hue-rotate(-45deg) contrast(1.6) brightness(1.3);
+  }
+  57.9% {
+    transform: translate(0, 0);
+    filter: none;
+  }
+  59.3% {
+    transform: translate(4px, -2px) skewX(2deg);
+    filter: contrast(1.3) brightness(1.2);
+  }
+  61.4%,
+  100% {
+    transform: translate(0, 0) skewX(0deg) scale(1);
+    filter: hue-rotate(0deg) contrast(1) brightness(1);
+  }
+}
+
+/* SPEZIELLER TEXT GLITCH KANAL (Perfekt abgefangen ab 8.9% für das menschliche Auge!) */
+@keyframes globalTextGlitchSync {
+  0%,
+  8.8% {
+    transform: translate(0, 0) skewX(0deg) scale(1);
+    filter: hue-rotate(0deg) contrast(1) brightness(1);
+  }
+  /* Leicht nach hinten verschoben (8.9%), damit es absolut gleichzeitig mit dem BG aufblitzt */
+  8.9% {
+    transform: translate(15px, -8px) skewX(9deg) scale(1.04);
+    filter: hue-rotate(90deg) contrast(2) brightness(1.5);
+  }
+  9.5% {
+    transform: translate(-2px, 2px) skewX(1deg) scale(1.01);
+    filter: hue-rotate(10deg) contrast(1.2);
+  }
+  10.2% {
+    transform: translate(-12px, 5px) skewX(-6deg) scale(1.03);
+    filter: hue-rotate(180deg) contrast(2) brightness(1.3);
+  }
+  10.9% {
+    transform: translate(2px, -1px) skewX(0deg);
+    filter: hue-rotate(20deg);
+  }
+  11.6% {
+    transform: translate(8px, 10px) skewX(4deg) scale(1.03);
+    filter: hue-rotate(45deg) contrast(1.8);
+  }
+  12.3% {
+    transform: translate(0, 0);
+    filter: none;
+  }
+  13.0% {
+    transform: translate(-4px, -2px) skewX(-2deg) scale(1.01);
+    filter: hue-rotate(-30deg) contrast(1.3);
+  }
+  14.4% {
+    transform: translate(1px, -1px);
+    filter: contrast(1.1);
+  }
+  15.8% {
+    transform: translate(3px, 1px) skewX(1deg);
+    filter: contrast(1.2);
+  }
+
+  18.5%,
+  54.9% {
+    transform: translate(0, 0) skewX(0deg) scale(1);
+    filter: hue-rotate(0deg) contrast(1) brightness(1);
+  }
+  /* Nebenblitz-Timing bleibt knackig synchron */
+  55.0% {
+    transform: translate(-15px, 6px) skewX(-8deg) scale(1.03);
+    filter: hue-rotate(-90deg) contrast(2) brightness(1.4);
+  }
+  55.7% {
+    transform: translate(1px, -1px);
+    filter: none;
+  }
+  56.4% {
+    transform: translate(10px, -5px) skewX(5deg) scale(1.02);
+    filter: hue-rotate(-180deg) contrast(1.6);
+  }
+  57.1% {
+    transform: translate(-1px, 2px);
+    filter: contrast(1.1);
+  }
+  57.8% {
+    transform: translate(-6px, 4px) skewX(-3deg) scale(1.02);
+    filter: hue-rotate(-45deg) contrast(1.4);
+  }
+  58.5% {
+    transform: translate(0, 0);
+    filter: none;
+  }
+  59.9% {
+    transform: translate(4px, -2px) skewX(2deg);
+    filter: contrast(1.2);
+  }
+  62.0%,
+  100% {
+    transform: translate(0, 0) skewX(0deg) scale(1);
+    filter: hue-rotate(0deg) contrast(1) brightness(1);
+  }
+}
+
+/* SVG ZICK-ZACK BLITZE SETUP */
+.lightning-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.lightning-svg {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: miter;
+  mix-blend-mode: screen;
+}
+
+.main-bolt {
+  left: 28%;
+  width: 45vw;
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 6px var(--tiffany))
+    drop-shadow(0 0 20px var(--tiffany)) drop-shadow(0 0 45px var(--tiffany))
+    drop-shadow(0 0 95px var(--tiffany)) drop-shadow(0 0 150px var(--purple))
+    url(#lightning-distortion);
+  animation: strike-svg-main 9s infinite linear;
+}
+
+.main-bolt .main-stream {
+  stroke-width: 5.5px;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: flash-stream 9s infinite linear;
+}
+
+.main-bolt .sub-branch {
+  stroke-width: 1.75px;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  opacity: 0;
+  animation: flash-branches 9s infinite linear;
+}
+
+.branch-bolt {
+  left: 68%;
+  width: 25vw;
+  stroke: #ffffff;
+  stroke-width: 4px;
+  filter: drop-shadow(0 0 5px var(--neon-pink))
+    drop-shadow(0 0 18px var(--neon-pink)) drop-shadow(0 0 40px var(--tiffany))
+    drop-shadow(0 0 90px var(--ultraviolet)) url(#lightning-distortion);
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: strike-svg-branch 9s infinite linear;
+}
+
+@keyframes strike-svg-main {
+  0%,
+  7.9% {
+    opacity: 0;
+  }
+  8%,
+  18% {
+    opacity: 1;
+  }
+  19%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash-stream {
+  0%,
+  7.9% {
+    stroke-dashoffset: 1200;
+    opacity: 0;
+  }
+  8% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  8.7% {
+    opacity: 0.1;
+  }
+  9.4% {
+    opacity: 0.95;
+  }
+  10.1% {
+    opacity: 0.2;
+  }
+  10.8% {
+    opacity: 1;
+  }
+  11.5% {
+    opacity: 0;
+  }
+  12.2% {
+    opacity: 0.8;
+  }
+  13.6% {
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  18%,
+  100% {
+    stroke-dashoffset: 1200;
+    opacity: 0;
+  }
+}
+
+@keyframes flash-branches {
+  0%,
+  8% {
+    stroke-dashoffset: 800;
+    opacity: 0;
+  }
+  8.2% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  9% {
+    opacity: 0.1;
+  }
+  9.5% {
+    opacity: 0.85;
+  }
+  10.4% {
+    opacity: 0;
+  }
+  11.1% {
+    opacity: 0.7;
+  }
+  12.5%,
+  100% {
+    stroke-dashoffset: 800;
+    opacity: 0;
+  }
+}
+
+@keyframes strike-svg-branch {
+  0%,
+  54.9% {
+    stroke-dashoffset: 1200;
+    opacity: 0;
+  }
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    stroke-width: 7px;
+  }
+  55.7% {
+    stroke-dashoffset: 0;
+    opacity: 0.1;
+  }
+  56.4% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+    stroke-width: 4px;
+  }
+  57.1% {
+    stroke-dashoffset: 0;
+    opacity: 0.3;
+  }
+  57.8% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  58.5% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  59.9% {
+    opacity: 0.6;
+  }
+  62%,
+  100% {
+    stroke-dashoffset: 1200;
+    opacity: 0;
+  }
+}
+
+.neon-blink-tiffany {
+  color: var(--tiffany);
+  font-family: "DotGothic16", sans-serif;
+  letter-spacing: 2px;
+  animation: blink 0.3s infinite alternate;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.4;
+    text-shadow: 0 0 2px var(--tiffany);
+  }
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 12px var(--tiffany),
+      0 0 20px var(--purple);
+  }
+}
+
+/* Street Fighter 2 Text-Effekt Emulation */
+.sf-arcade-title {
+  display: inline-block;
+  filter: drop-shadow(5px 5px 0px #05010c) drop-shadow(-2px -2px 0px #05010c)
+    drop-shadow(0px 0px 20px rgba(148, 0, 211, 0.7));
+  transform: skewX(-6deg) scaleY(1.05);
+}
