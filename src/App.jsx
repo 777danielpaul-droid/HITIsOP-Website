@@ -199,7 +199,7 @@ export default function App() {
 
       {/* 4. Interface Content - PERFEKT CODESYNCHRONISIERTER TEXT GLITCH */}
       <header className="glitch-text-wrapper relative mt-8 mb-12 text-center z-10 select-none">
-        <h1 className="sf-arcade-title text-6xl md:text-8xl font-black italic tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#00f3ff] to-[#9400d3]">
+        <h1 className="sf-arcade-title text-6xl md:text-8xl font-black italic tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#00f3ff] to-[#9400d3] scale-x-200 scale-y-150 origin-center inline-block">
           HIT IS OP
         </h1>
         <p className="neon-blink-tiffany mt-4 text-sm font-dotgothic">
