@@ -6,6 +6,74 @@ export default function App() {
       {/* 1. CRT Scanlines Röhren-Effekt */}
       <div className="crt-scanlines" />
 
+      {/* FIXED: Cyberpunk-Regen Container */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-5">
+        <div
+          className="rain-drop"
+          style={{
+            left: "5%",
+            animationDelay: "0s",
+            animationDuration: "0.8s",
+          }}
+        />
+        <div
+          className="rain-drop"
+          style={{
+            left: "15%",
+            animationDelay: "0.4s",
+            animationDuration: "1.2s",
+          }}
+        />
+        <div
+          className="rain-drop"
+          style={{
+            left: "30%",
+            animationDelay: "0.2s",
+            animationDuration: "0.9s",
+          }}
+        />
+        <div
+          className="rain-drop"
+          style={{
+            left: "45%",
+            animationDelay: "0.7s",
+            animationDuration: "1.4s",
+          }}
+        />
+        <div
+          className="rain-drop"
+          style={{
+            left: "60%",
+            animationDelay: "0.1s",
+            animationDuration: "1.1s",
+          }}
+        />
+        <div
+          className="rain-drop"
+          style={{
+            left: "75%",
+            animationDelay: "0.5s",
+            animationDuration: "0.7s",
+          }}
+        />
+        <div
+          className="rain-drop"
+          style={{
+            left: "88%",
+            animationDelay: "0.3s",
+            animationDuration: "1.3s",
+          }}
+        />
+        <div
+          className="rain-drop"
+          style={{
+            left: "95%",
+            animationDelay: "0.6s",
+            animationDuration: "1.0s",
+          }}
+        />
+      </div>
+
       {/* 2. Hintergrund-Container mit dem synchronisierten Glitch-Bild */}
       <div className="glitch-bg absolute inset-0 w-full h-full pointer-events-none z-1">
         <img
