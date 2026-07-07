@@ -162,6 +162,7 @@ export default function App() {
           preserveAspectRatio="none"
         >
           <defs>
+            {/* Dein alter Blitz-Filter bleibt stehen: */}
             <filter id="lightning-distortion">
               <feTurbulence
                 type="fractalNoise"
@@ -173,6 +174,23 @@ export default function App() {
                 in="SourceGraphic"
                 in2="noise"
                 scale="20"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+
+            {/* NEU: Der Pinselstrich-Kanten-Filter für die Überschrift */}
+            <filter id="brush-edges">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.8 0.1" /* Hohe Frequenz auf der X-Achse erzeugt feine Pinsel-Fransen */
+                numOctaves="3"
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="9" /* Stärke des Ausfransens */
                 xChannelSelector="R"
                 yChannelSelector="G"
               />
@@ -198,8 +216,10 @@ export default function App() {
       </div>
 
       {/* 4. Interface Content - PERFEKT CODESYNCHRONISIERTER TEXT GLITCH */}
-      <header className="glitch-text-wrapper relative mt-8 mb-12 text-center z-10 select-none">
-        <h1 className="sf-arcade-title text-6xl md:text-8xl font-black italic tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#00f3ff] to-[#9400d3] scale-x-200 scale-y-150 origin-center inline-block">
+      {/* 4. Interface Content - PERFEKT CODESYNCHRONISIERTER TEXT GLITCH */}
+      <header className="glitch-text-wrapper relative mt-2 mb-12 text-center z-10 select-none">
+        {/* font-black wurde entfernt, scale-x und scale-y für die fette Arcade-Breite hinzugefügt */}
+        <h1 className="sf-arcade-title text-6xl md:text-8xl italic tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#00f3ff] to-[#9400d3] scale-x-200 scale-y-150 origin-center inline-block">
           HIT IS OP
         </h1>
         <p className="neon-blink-tiffany mt-4 text-sm font-dotgothic">
@@ -208,7 +228,7 @@ export default function App() {
       </header>
 
       {/* 5. Buttons / Hauptinhalt */}
-      <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-87">
+      <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-107">
         <ArcadeButton>Story-Mode</ArcadeButton>
         <ArcadeButton>2P-Mode</ArcadeButton>
         <ArcadeButton>Options</ArcadeButton>

@@ -7,10 +7,10 @@
   --color-neon-pink: #ff007f;
   --color-bg-dark: #05010c;
 
-  --font-audiowide: "Audiowide", sans-serif;
+  /* Die Variable bleibt hier sauber definiert */
+  --font-audiowide: "Permanent Marker", sans-serif;
   --font-dotgothic: "DotGothic16", sans-serif;
 }
-
 :root {
   --purple: #9400d3;
   --ultraviolet: #4b0082;
@@ -425,8 +425,11 @@
 /* Street Fighter 2 Text-Effekt Emulation */
 .sf-arcade-title {
   display: inline-block;
+
+  /* Wir fügen url(#brush-edges) zu deinen bestehenden Schatten hinzu! */
   filter: drop-shadow(5px 5px 0px #05010c) drop-shadow(-2px -2px 0px #05010c)
-    drop-shadow(0px 0px 20px rgba(148, 0, 211, 0.7));
+    drop-shadow(0px 0px 20px rgba(148, 0, 211, 0.7)) url(#brush-edges); /* <-- Das zaubert die Pinselkanten! */
+
   transform: skewX(-6deg) scaleY(1.05);
 }
 /* Spezieller Hover-Glitch für die Arcade-Buttons */
