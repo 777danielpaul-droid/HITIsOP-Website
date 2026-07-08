@@ -144,14 +144,14 @@ export default function App() {
         />
       </div>
       {/* ======================================================================= */}
-      {/* UPDATE: JAPANISCHER CODE-REGEN (BÜNDIG AM RECHTEN & LINKEN RAND)      */}
+      {/* REGEN-SYSTEM (RECHTS & LINKS BOMBENFEST)            */}
       {/* ======================================================================= */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-5 font-dotgothic select-none">
-        {/* --- LINKE SEITE (Ganz an den Rand gedrückt) --- */}
-        {/* Spalte 1: Jetzt auf 0% – klebt direkt an der linken Kante */}
+        {/* --- LINKE SEITE (Spuren reihen sich lückenlos ab 0px aneinander) --- */}
+        {/* Spur 1: Genau an der Kante */}
         <div
           className="matrix-column matrix-tiffany text-lg"
-          style={{ left: "0%", animationDuration: "4s", animationDelay: "0s" }}
+          style={{ left: "0px", animationDuration: "4s", animationDelay: "0s" }}
         >
           <span>シ</span>
           <span>ス</span>
@@ -166,11 +166,11 @@ export default function App() {
           <span>ド</span>
         </div>
 
-        {/* Spalte 2: Dicht dahinter auf 3% */}
+        {/* Spur 2: Rutscht exakt um eine Spurbreite (55px) nach rechts */}
         <div
           className="matrix-column matrix-purple text-3xl"
           style={{
-            left: "3%",
+            left: "55px",
             animationDuration: "6.5s",
             animationDelay: "2s",
           }}
@@ -186,11 +186,11 @@ export default function App() {
           <span>ズ</span>
         </div>
 
-        {/* Spalte 3: Auf 6% für ein kompaktes Rand-Paket */}
+        {/* Spur 3: Rutscht um zwei Spurbreiten (110px) nach rechts */}
         <div
-          className="matrix-column matrix-tiffany text-xs"
+          className="matrix-column matrix-tiffany text-sm"
           style={{
-            left: "6%",
+            left: "110px",
             animationDuration: "3.2s",
             animationDelay: "0.8s",
           }}
@@ -202,16 +202,14 @@ export default function App() {
           <span>キ</span>
           <span>ョ</span>
           <span>ウ</span>
-          <span>街</span>
-          <span>区</span>
         </div>
 
-        {/* --- RECHTE SEITE (Ganz an den Rand gedrückt) --- */}
-        {/* Spalte 4: Jetzt auf 0% – klebt direkt an der rechten Kante */}
+        {/* --- RECHTE SEITE (Spuren reihen sich lückenlos ab 0px aneinander) --- */}
+        {/* Spur 4: Genau an der rechten Kante */}
         <div
-          className="matrix-column matrix-purple text-base"
+          className="matrix-column matrix-purple text-2xl"
           style={{
-            right: "0%",
+            right: "0px",
             animationDuration: "5s",
             animationDelay: "0.4s",
           }}
@@ -226,11 +224,11 @@ export default function App() {
           <span>ス</span>
         </div>
 
-        {/* Spalte 5: Dicht dahinter auf 3% */}
+        {/* Spur 5: Rutscht exakt um eine Spurbreite (55px) nach left */}
         <div
           className="matrix-column matrix-tiffany text-3xl"
           style={{
-            right: "3%",
+            right: "55px",
             animationDuration: "7.5s",
             animationDelay: "3.5s",
           }}
@@ -244,11 +242,11 @@ export default function App() {
           <span>ア</span>
         </div>
 
-        {/* Spalte 6: Auf 6% */}
+        {/* Spur 6: Rutscht um zwei Spurbreiten (110px) nach left */}
         <div
           className="matrix-column matrix-purple text-sm"
           style={{
-            right: "6%",
+            right: "110px",
             animationDuration: "4.2s",
             animationDelay: "1.7s",
           }}
@@ -349,7 +347,16 @@ export default function App() {
 
       {/* 5. Buttons / Hauptinhalt */}
       <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-107">
-        <ArcadeButton>Story-Mode</ArcadeButton>
+        {/* Story-Mode mit funktionierendem Link - JETZT PERFEKT ZENTRIERT */}
+        <a
+          href="https://coldasic3.itch.io/h1tisop"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex justify-center" /* Wechsel von inline-block zu flex justify-center */
+        >
+          <ArcadeButton>Story-Mode</ArcadeButton>
+        </a>
+
         <ArcadeButton>2P-Mode</ArcadeButton>
         <ArcadeButton>Options</ArcadeButton>
       </main>

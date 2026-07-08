@@ -648,16 +648,14 @@
   opacity: 0.3;
 }
 /* --------------------------------------------------
-   JAPANISCHER CYBER-MATRIX-REGEN (SEITEN-SYSTEM)
+   JAPANISCHER CYBER-MATRIX-REGEN (ULTRA-STABILES SPUREN-SYSTEM)
 -------------------------------------------------- */
 @keyframes matrixFall {
   0% {
-    /* Startet komplett unsichtbar weit über dem oberen Bildschirmrand */
     transform: translateY(-120%) scale(0.8);
   }
   50% {
-    /* Verändert mitten im Flug unvorhersehbar die Größe für den Glitch-Vibe */
-    transform: translateY(40vh) scale(1.2);
+    transform: translateY(40vh) scale(1.1);
   }
   100% {
     transform: translateY(115vh) scale(0.9);
@@ -671,51 +669,49 @@
     filter: brightness(0.5) blur(2px);
   }
   25% {
-    opacity: 0.45; /* VORHER 0.7: Jetzt viel transparenter und geisterhafter */
-    filter: brightness(2.5) blur(0px); /* Extrem hochgeschraubte Helligkeit */
-
-    /* Der ultimative Neon-Glow: 4 Schichten übereinander gestapelt! */
+    opacity: 0.45;
+    filter: brightness(2.5) blur(0px);
     text-shadow:
       0 0 4px currentColor,
       0 0 12px currentColor,
-      0 0 30px currentColor,
-      0 0 50px currentColor;
+      0 0 30px currentColor;
   }
   50% {
-    opacity: 0.05; /* Fast komplett unsichtbar, nur ein Hauch von Licht */
+    opacity: 0.05;
     filter: brightness(0.5) blur(3px);
-    text-shadow: 0 0 8px currentColor;
   }
   75% {
-    opacity: 0.35; /* VORHER 0.6: Zweiter kleinerer, dezenter Peak */
+    opacity: 0.35;
     filter: brightness(1.8) blur(0px);
-    text-shadow:
-      0 0 6px currentColor,
-      0 0 20px currentColor;
+    text-shadow: 0 0 6px currentColor;
   }
 }
 
-/* Grund-Setup der Buchstabenspalten */
+/* Jede Spalte verhält sich jetzt wie ein fester, unbeweglicher Schacht */
 .matrix-column {
   position: absolute;
   top: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  line-height: 1.2;
+  align-items: center; /* Zentriert die Zeichen perfekt in ihrer Spur */
+  width: 55px; /* Feste Spurbreite: Verhindert jegliches Abschneiden am Rand */
+  text-align: center;
+  line-height: 1.1;
   font-weight: 900;
-  letter-spacing: 4px;
-  /* Beide Animationen laufen asynchron nebeneinander her */
+  transform-origin: center center; /* Skaliert absolut sauber aus der Spurenmitte */
   animation:
     matrixFall infinite linear,
     matrixGhostBlink infinite ease-in-out;
 }
 
-/* Farbzuweisungen mit automatischer Anpassung für Text-Glows */
-.matrix-tiffany {
-  color: var(--tiffany); /* Nutzt dein Neon-Türkis */
+.matrix-column span {
+  display: block;
+  width: 100%;
 }
 
+.matrix-tiffany {
+  color: var(--tiffany);
+}
 .matrix-purple {
-  color: var(--purple); /* Nutzt dein Arcade-Lila */
+  color: var(--purple);
 }
