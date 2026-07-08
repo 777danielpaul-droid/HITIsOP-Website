@@ -346,21 +346,33 @@ export default function App() {
       </header>
 
       {/* 5. Buttons / Hauptinhalt */}
-      <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-107">
-        {/* Story-Mode mit funktionierendem Link - JETZT PERFEKT ZENTRIERT */}
+      <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-87">
+        {/* Story-Mode mit funktionierendem Link */}
         <a
           href="https://coldasic3.itch.io/h1tisop"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full flex justify-center" /* Wechsel von inline-block zu flex justify-center */
+          className="w-full flex justify-center"
         >
-          <ArcadeButton>Story-Mode</ArcadeButton>
+          <ArcadeButton>Scratch-Game</ArcadeButton>
         </a>
 
-        <ArcadeButton>2P-Mode</ArcadeButton>
-        <ArcadeButton>Options</ArcadeButton>
-      </main>
+        <ArcadeButton>Unity-game</ArcadeButton>
+        <ArcadeButton>Rage-Game</ArcadeButton>
 
+        {/* NEU: Sound/Musik-Button als Anker für deine Audio-Logik */}
+        <ArcadeButton
+          id="music-toggle-btn"
+          onClick={() => {
+            console.log(
+              "Musik-Button geklickt! Hier kommt deine Audio-Funktion hin.",
+            );
+            // Hier bauen wir im nächsten Schritt die Musik-Steuerung ein
+          }}
+        >
+          Sound: OFF
+        </ArcadeButton>
+      </main>
       {/* 6. Social Media Footer-Leiste mit dynamischem Hover-Pop (50% -> 100%) */}
       <footer className="relative z-10 mt-auto pt-12 pb-4 flex flex-wrap justify-center gap-37 select-none">
         {/* YouTube Icon */}
