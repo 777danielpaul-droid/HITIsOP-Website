@@ -343,7 +343,7 @@ export default function App() {
           HIT IS OP
         </h1>
         <p className="neon-blink-tiffany mt-4 text-sm font-dotgothic">
-          ⚡ SYSTEM OVERLOAD // ENERGY: 100%
+          Aura // Over 9K
         </p>
       </header>
 
