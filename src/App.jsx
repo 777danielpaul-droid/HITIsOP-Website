@@ -1,12 +1,33 @@
+import { useState, useRef, useEffect } from "react"; // Stell sicher, dass useEffect hier mit importiert ist
 import ArcadeButton from "./ArcadeButton";
 
 export default function App() {
+  // 1. Sound-State für die UI
+  const [isMuted, setIsMuted] = useState(true);
+
+  // 2. Ref für das Audio-Objekt erstellen
+  const audioRef = useRef(null);
+
+  // 3. Audio erst nach dem ersten Rendern sicher initialisieren (behebt den ESLint-Fehler!)
+  useEffect(() => {
+    audioRef.current = new Audio("/bg-music.mp3");
+    audioRef.current.loop = true;
+
+    // Aufräumen, falls die Komponente jemals unmountet wird
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
+  // === AB HIER FOLGT DEIN RETURN ===
   return (
     <div className="relative min-h-screen bg-[#05010c] flex flex-col items-center justify-start p-6 text-white font-audiowide overflow-hidden">
       {/* 1. CRT Scanlines Röhren-Effekt */}
       <div className="crt-scanlines" />
 
-      {/* NEU: Das permanente Umgebungs-Flimmern im tiefen Hintergrund */}
+      {/* Das permanente Umgebungs-Flimmern im tiefen Hintergrund */}
       <div className="ambient-sky-flicker" />
 
       {/* Cyberpunk-Doppelregen Container (Perfekt synchronisiert) */}
@@ -143,12 +164,10 @@ export default function App() {
           }}
         />
       </div>
-      {/* ======================================================================= */}
-      {/* REGEN-SYSTEM (RECHTS & LINKS BOMBENFEST)            */}
-      {/* ======================================================================= */}
+
+      {/* REGEN-SYSTEM (RECHTS & LINKS BOMBENFEST) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-5 font-dotgothic select-none">
-        {/* --- LINKE SEITE (Spuren reihen sich lückenlos ab 0px aneinander) --- */}
-        {/* Spur 1: Genau an der Kante */}
+        {/* --- LINKE SEITE --- */}
         <div
           className="matrix-column matrix-tiffany text-lg"
           style={{ left: "0px", animationDuration: "4s", animationDelay: "0s" }}
@@ -166,7 +185,6 @@ export default function App() {
           <span>ド</span>
         </div>
 
-        {/* Spur 2: Rutscht exakt um eine Spurbreite (55px) nach rechts */}
         <div
           className="matrix-column matrix-purple text-3xl"
           style={{
@@ -186,7 +204,6 @@ export default function App() {
           <span>ズ</span>
         </div>
 
-        {/* Spur 3: Rutscht um zwei Spurbreiten (110px) nach rechts */}
         <div
           className="matrix-column matrix-tiffany text-sm"
           style={{
@@ -204,8 +221,7 @@ export default function App() {
           <span>ウ</span>
         </div>
 
-        {/* --- RECHTE SEITE (Spuren reihen sich lückenlos ab 0px aneinander) --- */}
-        {/* Spur 4: Genau an der rechten Kante */}
+        {/* --- RECHTE SEITE --- */}
         <div
           className="matrix-column matrix-purple text-2xl"
           style={{
@@ -224,7 +240,6 @@ export default function App() {
           <span>ス</span>
         </div>
 
-        {/* Spur 5: Rutscht exakt um eine Spurbreite (55px) nach left */}
         <div
           className="matrix-column matrix-tiffany text-3xl"
           style={{
@@ -242,7 +257,6 @@ export default function App() {
           <span>ア</span>
         </div>
 
-        {/* Spur 6: Rutscht um zwei Spurbreiten (110px) nach left */}
         <div
           className="matrix-column matrix-purple text-sm"
           style={{
@@ -262,6 +276,7 @@ export default function App() {
           <span>代</span>
         </div>
       </div>
+
       {/* 2. Hintergrund-Container mit dem synchronisierten Glitch-Bild */}
       <div className="glitch-bg absolute inset-0 w-full h-full pointer-events-none z-1">
         <img
@@ -280,7 +295,6 @@ export default function App() {
           preserveAspectRatio="none"
         >
           <defs>
-            {/* Dein alter Blitz-Filter bleibt stehen: */}
             <filter id="lightning-distortion">
               <feTurbulence
                 type="fractalNoise"
@@ -297,18 +311,17 @@ export default function App() {
               />
             </filter>
 
-            {/* NEU: Der Pinselstrich-Kanten-Filter für die Überschrift */}
             <filter id="brush-edges">
               <feTurbulence
                 type="fractalNoise"
-                baseFrequency="0.8 0.1" /* Hohe Frequenz auf der X-Achse erzeugt feine Pinsel-Fransen */
+                baseFrequency="0.8 0.1"
                 numOctaves="3"
                 result="noise"
               />
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="noise"
-                scale="9" /* Stärke des Ausfransens */
+                scale="9"
                 xChannelSelector="R"
                 yChannelSelector="G"
               />
@@ -334,9 +347,7 @@ export default function App() {
       </div>
 
       {/* 4. Interface Content - PERFEKT CODESYNCHRONISIERTER TEXT GLITCH */}
-      {/* 4. Interface Content - PERFEKT CODESYNCHRONISIERTER TEXT GLITCH */}
       <header className="glitch-text-wrapper relative mt-2 mb-12 text-center z-10 select-none">
-        {/* font-black wurde entfernt, scale-x und scale-y für die fette Arcade-Breite hinzugefügt */}
         <h1 className="sf-arcade-title text-6xl md:text-8xl italic tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#00f3ff] to-[#9400d3] scale-x-200 scale-y-150 origin-center inline-block">
           HIT IS OP
         </h1>
@@ -345,9 +356,8 @@ export default function App() {
         </p>
       </header>
 
-      {/* 5. Buttons / Hauptinhalt */}
+      {/* 5. Buttons / Hauptinhalt - HIER WURDE DER FEHLER BEHOBEN */}
       <main className="relative z-10 flex flex-col items-center gap-4 w-full max-w-md mt-87">
-        {/* Story-Mode mit funktionierendem Link */}
         <a
           href="https://coldasic3.itch.io/h1tisop"
           target="_blank"
@@ -360,22 +370,27 @@ export default function App() {
         <ArcadeButton>Unity-game</ArcadeButton>
         <ArcadeButton>Rage-Game</ArcadeButton>
 
-        {/* NEU: Sound/Musik-Button als Anker für deine Audio-Logik */}
+        {/* Funktionierender Musik-Button */}
         <ArcadeButton
           id="music-toggle-btn"
           onClick={() => {
-            console.log(
-              "Musik-Button geklickt! Hier kommt deine Audio-Funktion hin.",
-            );
-            // Hier bauen wir im nächsten Schritt die Musik-Steuerung ein
+            if (isMuted) {
+              audioRef.current
+                .play()
+                .catch((err) => console.log("Audio blockiert:", err));
+              setIsMuted(false);
+            } else {
+              audioRef.current.pause();
+              setIsMuted(true);
+            }
           }}
         >
-          Sound: OFF
+          {isMuted ? "Sound: OFF" : "Sound: ON"}
         </ArcadeButton>
       </main>
-      {/* 6. Social Media Footer-Leiste mit dynamischem Hover-Pop (50% -> 100%) */}
+
+      {/* 6. Social Media Footer-Leiste */}
       <footer className="relative z-10 mt-auto pt-12 pb-4 flex flex-wrap justify-center gap-37 select-none">
-        {/* YouTube Icon */}
         <a
           href="https://youtube.com/@deinkanal"
           target="_blank"
@@ -390,7 +405,6 @@ export default function App() {
           </svg>
         </a>
 
-        {/* TikTok Icon */}
         <a
           href="https://tiktok.com/@deinkanal"
           target="_blank"
@@ -405,7 +419,6 @@ export default function App() {
           </svg>
         </a>
 
-        {/* X (ehemals Twitter) Icon */}
         <a
           href="https://x.com/deinkanal"
           target="_blank"
@@ -420,7 +433,6 @@ export default function App() {
           </svg>
         </a>
 
-        {/* WhatsApp Share-Icon */}
         <a
           href="https://api.whatsapp.com/send?text=Schau%20dir%20dieses%20brutale%20Arcade-Spiel%20an!%20HIT%20IS%20OP!"
           target="_blank"
