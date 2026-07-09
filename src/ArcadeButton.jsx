@@ -6,10 +6,15 @@ export default function ArcadeButton({ children, onClick }) {
         group
         relative
         w-full
-        max-w-[280px]
-        px-6
+        /* HIER ANGEPASST: Auf Mobile etwas schmaler, ab 'sm' (Tablets) wieder deine 280px */
+        max-w-[240px]
+        sm:max-w-[280px]
+        px-4
+        sm:px-6
         py-3
-        text-lg
+        /* HIER ANGEPASST: Text-Größe responsive */
+        text-base
+        sm:text-lg
         font-black
         uppercase
         tracking-widest
@@ -26,7 +31,7 @@ export default function ArcadeButton({ children, onClick }) {
         /* Schräger Basis-Schnitt */
         transform -skew-x-12
         
-        /* Start-Schatten (Türkis für den Kontrast zum lila Rahmen) */
+        /* Start-Schatten */
         box-shadow-[4px_4px_0px_#00f3ff]
         
         /* UNSER HOVER-GLITCH AUS DER CSS-DATEI */
@@ -38,7 +43,6 @@ export default function ArcadeButton({ children, onClick }) {
         active:shadow-none
       "
     >
-      {/* Der Text wird im Button wieder gerade gerückt */}
       <span className="block transform skew-x-12 tracking-wider pointer-events-none">
         {children}
       </span>
