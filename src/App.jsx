@@ -292,7 +292,7 @@ export default function App() {
       </main>
 
       {/* 9. Social-Footer */}
-      <footer className="relative z-10 mt-auto pt-16 pb-6 flex flex-wrap justify-center gap-6 md:gap-48 select-none w-full px-4">
+      <footer className="relative z-10 mt-auto pt-16 pb-6 flex flex-wrap justify-center gap-12 md:gap-48 select-none w-full px-4">
         {SOCIALS.map((s) => (
           <a
             key={s.label}
