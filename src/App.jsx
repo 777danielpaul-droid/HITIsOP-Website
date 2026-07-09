@@ -348,7 +348,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 pt-12 pb-4 flex flex-wrap justify-center gap-6 select-none">
+      <footer className="relative z-10 pt-12 pb-4 flex flex-wrap justify-center gap-37 select-none">
         <a
           href="https://youtube.com/@deinkanal"
           target="_blank"
