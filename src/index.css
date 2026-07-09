@@ -1,16 +1,50 @@
 @import "tailwindcss";
 
+/* ==================================================================
+   BASIS / RESET  (kein scale-Hack, kein body::after-Rahmen mehr —
+   die erzeugten den Rand-Strich. overflow-x:hidden reicht.)
+================================================================== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: #05010c;
+  overflow-x: hidden;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Alle fixed/absolute Effekt-Ebenen: bomben­fest am Viewport beschnitten */
+.stage {
+  overflow-x: hidden;
+}
+
+.fx-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
 @theme {
   --color-purple-arcade: #9400d3;
   --color-ultraviolet: #4b0082;
   --color-tiffany: #00f3ff;
   --color-neon-pink: #ff007f;
   --color-bg-dark: #05010c;
-
-  /* Die Variable bleibt hier sauber definiert */
   --font-audiowide: "Permanent Marker", sans-serif;
   --font-dotgothic: "DotGothic16", sans-serif;
 }
+
 :root {
   --purple: #9400d3;
   --ultraviolet: #4b0082;
@@ -18,25 +52,36 @@
   --neon-pink: #ff007f;
 }
 
-/* CRT Röhren-Scanlines */
+/* ==================================================================
+   CRT RÖHREN-SCANLINES
+================================================================== */
 .crt-scanlines {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
-  background-size: 100% 4px;
-  z-index: 10;
+  inset: 0;
+  z-index: 50;
   pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 0px,
+    rgba(18, 16, 16, 0) 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 4px
+  );
 }
 
-/* Master-Synchronisierte Glitch-Animation für den Bild-Hintergrund */
+/* ==================================================================
+   MASTER-GLITCH (Hintergrundbild + Titel, synchron 9s)
+================================================================== */
 .glitch-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
   animation: globalGlitchSync 9s infinite linear !important;
 }
 
-/* Performance-Kanal für den Text-Glitch inklusive Farb-Verzerrungs-Filter */
 .glitch-text-wrapper {
   will-change: transform, filter;
   transform-style: preserve-3d;
@@ -44,182 +89,56 @@
   animation: globalTextGlitchSync 9s infinite linear !important;
 }
 
-/* MASTER HINTERGRUND GLITCH (Sofortige Reaktion ab 8.0%) */
 @keyframes globalGlitchSync {
-  0%,
-  7.9% {
-    transform: translate(0, 0) skewX(0deg) scale(1);
-    filter: hue-rotate(0deg) contrast(1) brightness(1);
-  }
-  8% {
-    transform: translate(15px, -8px) skewX(9deg) scale(1.04);
-    filter: hue-rotate(90deg) contrast(2.5) brightness(1.7);
-  }
-  8.7% {
-    transform: translate(-2px, 2px) skewX(1deg) scale(1.01);
-    filter: hue-rotate(10deg) contrast(1.2) brightness(1.1);
-  }
-  9.4% {
-    transform: translate(-12px, 5px) skewX(-6deg) scale(1.03);
-    filter: hue-rotate(180deg) contrast(2.2) brightness(1.5);
-  }
-  10.1% {
-    transform: translate(2px, -1px) skewX(0deg);
-    filter: hue-rotate(20deg) contrast(1.1);
-  }
-  10.8% {
-    transform: translate(8px, 10px) skewX(4deg) scale(1.03);
-    filter: hue-rotate(45deg) contrast(2) brightness(1.6);
-  }
-  11.5% {
-    transform: translate(0, 0);
-    filter: none;
-  }
-  12.2% {
-    transform: translate(-4px, -2px) skewX(-2deg) scale(1.01);
-    filter: hue-rotate(-30deg) contrast(1.4) brightness(1.2);
-  }
-  13.6% {
-    transform: translate(1px, -1px);
-    filter: contrast(1.1);
-  }
-  15% {
-    transform: translate(3px, 1px) skewX(1deg);
-    filter: contrast(1.3) brightness(1.2);
-  }
-
-  18%,
-  54.3% {
-    transform: translate(0, 0) skewX(0deg) scale(1);
-    filter: hue-rotate(0deg) contrast(1) brightness(1);
-  }
-  /* Nebenblitz (um 0.6% vorgezogen gegen Render-Lag) */
-  54.4% {
-    transform: translate(-15px, 6px) skewX(-8deg) scale(1.03);
-    filter: hue-rotate(-90deg) contrast(2.2) brightness(1.5);
-  }
-  55.1% {
-    transform: translate(1px, -1px);
-    filter: none;
-  }
-  55.8% {
-    transform: translate(10px, -5px) skewX(5deg) scale(1.02);
-    filter: hue-rotate(-180deg) contrast(1.8) brightness(1.4);
-  }
-  56.5% {
-    transform: translate(-1px, 2px);
-    filter: contrast(1.1);
-  }
-  57.2% {
-    transform: translate(-6px, 4px) skewX(-3deg) scale(1.02);
-    filter: hue-rotate(-45deg) contrast(1.6) brightness(1.3);
-  }
-  57.9% {
-    transform: translate(0, 0);
-    filter: none;
-  }
-  59.3% {
-    transform: translate(4px, -2px) skewX(2deg);
-    filter: contrast(1.3) brightness(1.2);
-  }
-  61.4%,
-  100% {
-    transform: translate(0, 0) skewX(0deg) scale(1);
-    filter: hue-rotate(0deg) contrast(1) brightness(1);
-  }
+  0%, 7.9% { transform: translate(0, 0) skewX(0deg) scale(1); filter: hue-rotate(0deg) contrast(1) brightness(1); }
+  8% { transform: translate(15px, -8px) skewX(9deg) scale(1.04); filter: hue-rotate(90deg) contrast(2.5) brightness(1.7); }
+  8.7% { transform: translate(-2px, 2px) skewX(1deg) scale(1.01); filter: hue-rotate(10deg) contrast(1.2) brightness(1.1); }
+  9.4% { transform: translate(-12px, 5px) skewX(-6deg) scale(1.03); filter: hue-rotate(180deg) contrast(2.2) brightness(1.5); }
+  10.1% { transform: translate(2px, -1px) skewX(0deg); filter: hue-rotate(20deg) contrast(1.1); }
+  10.8% { transform: translate(8px, 10px) skewX(4deg) scale(1.03); filter: hue-rotate(45deg) contrast(2) brightness(1.6); }
+  11.5% { transform: translate(0, 0); filter: none; }
+  12.2% { transform: translate(-4px, -2px) skewX(-2deg) scale(1.01); filter: hue-rotate(-30deg) contrast(1.4) brightness(1.2); }
+  13.6% { transform: translate(1px, -1px); filter: contrast(1.1); }
+  15% { transform: translate(3px, 1px) skewX(1deg); filter: contrast(1.3) brightness(1.2); }
+  18%, 54.3% { transform: translate(0, 0) skewX(0deg) scale(1); filter: hue-rotate(0deg) contrast(1) brightness(1); }
+  54.4% { transform: translate(-15px, 6px) skewX(-8deg) scale(1.03); filter: hue-rotate(-90deg) contrast(2.2) brightness(1.5); }
+  55.1% { transform: translate(1px, -1px); filter: none; }
+  55.8% { transform: translate(10px, -5px) skewX(5deg) scale(1.02); filter: hue-rotate(-180deg) contrast(1.8) brightness(1.4); }
+  56.5% { transform: translate(-1px, 2px); filter: contrast(1.1); }
+  57.2% { transform: translate(-6px, 4px) skewX(-3deg) scale(1.02); filter: hue-rotate(-45deg) contrast(1.6) brightness(1.3); }
+  57.9% { transform: translate(0, 0); filter: none; }
+  59.3% { transform: translate(4px, -2px) skewX(2deg); filter: contrast(1.3) brightness(1.2); }
+  61.4%, 100% { transform: translate(0, 0) skewX(0deg) scale(1); filter: hue-rotate(0deg) contrast(1) brightness(1); }
 }
 
-/* SPEZIELLER TEXT GLITCH KANAL (Perfekt abgefangen ab 8.9% für das menschliche Auge!) */
 @keyframes globalTextGlitchSync {
-  0%,
-  8.8% {
-    transform: translate(0, 0) skewX(0deg) scale(1);
-    filter: hue-rotate(0deg) contrast(1) brightness(1);
-  }
-  /* Leicht nach hinten verschoben (8.9%), damit es absolut gleichzeitig mit dem BG aufblitzt */
-  8.9% {
-    transform: translate(15px, -8px) skewX(9deg) scale(1.04);
-    filter: hue-rotate(90deg) contrast(2) brightness(1.5);
-  }
-  9.5% {
-    transform: translate(-2px, 2px) skewX(1deg) scale(1.01);
-    filter: hue-rotate(10deg) contrast(1.2);
-  }
-  10.2% {
-    transform: translate(-12px, 5px) skewX(-6deg) scale(1.03);
-    filter: hue-rotate(180deg) contrast(2) brightness(1.3);
-  }
-  10.9% {
-    transform: translate(2px, -1px) skewX(0deg);
-    filter: hue-rotate(20deg);
-  }
-  11.6% {
-    transform: translate(8px, 10px) skewX(4deg) scale(1.03);
-    filter: hue-rotate(45deg) contrast(1.8);
-  }
-  12.3% {
-    transform: translate(0, 0);
-    filter: none;
-  }
-  13.0% {
-    transform: translate(-4px, -2px) skewX(-2deg) scale(1.01);
-    filter: hue-rotate(-30deg) contrast(1.3);
-  }
-  14.4% {
-    transform: translate(1px, -1px);
-    filter: contrast(1.1);
-  }
-  15.8% {
-    transform: translate(3px, 1px) skewX(1deg);
-    filter: contrast(1.2);
-  }
-
-  18.5%,
-  54.9% {
-    transform: translate(0, 0) skewX(0deg) scale(1);
-    filter: hue-rotate(0deg) contrast(1) brightness(1);
-  }
-  /* Nebenblitz-Timing bleibt knackig synchron */
-  55.0% {
-    transform: translate(-15px, 6px) skewX(-8deg) scale(1.03);
-    filter: hue-rotate(-90deg) contrast(2) brightness(1.4);
-  }
-  55.7% {
-    transform: translate(1px, -1px);
-    filter: none;
-  }
-  56.4% {
-    transform: translate(10px, -5px) skewX(5deg) scale(1.02);
-    filter: hue-rotate(-180deg) contrast(1.6);
-  }
-  57.1% {
-    transform: translate(-1px, 2px);
-    filter: contrast(1.1);
-  }
-  57.8% {
-    transform: translate(-6px, 4px) skewX(-3deg) scale(1.02);
-    filter: hue-rotate(-45deg) contrast(1.4);
-  }
-  58.5% {
-    transform: translate(0, 0);
-    filter: none;
-  }
-  59.9% {
-    transform: translate(4px, -2px) skewX(2deg);
-    filter: contrast(1.2);
-  }
-  62.0%,
-  100% {
-    transform: translate(0, 0) skewX(0deg) scale(1);
-    filter: hue-rotate(0deg) contrast(1) brightness(1);
-  }
+  0%, 8.8% { transform: translate(0, 0) skewX(0deg) scale(1); filter: hue-rotate(0deg) contrast(1) brightness(1); }
+  8.9% { transform: translate(15px, -8px) skewX(9deg) scale(1.04); filter: hue-rotate(90deg) contrast(2) brightness(1.5); }
+  9.5% { transform: translate(-2px, 2px) skewX(1deg) scale(1.01); filter: hue-rotate(10deg) contrast(1.2); }
+  10.2% { transform: translate(-12px, 5px) skewX(-6deg) scale(1.03); filter: hue-rotate(180deg) contrast(2) brightness(1.3); }
+  10.9% { transform: translate(2px, -1px) skewX(0deg); filter: hue-rotate(20deg); }
+  11.6% { transform: translate(8px, 10px) skewX(4deg) scale(1.03); filter: hue-rotate(45deg) contrast(1.8); }
+  12.3% { transform: translate(0, 0); filter: none; }
+  13.0% { transform: translate(-4px, -2px) skewX(-2deg) scale(1.01); filter: hue-rotate(-30deg) contrast(1.3); }
+  14.4% { transform: translate(1px, -1px); filter: contrast(1.1); }
+  15.8% { transform: translate(3px, 1px) skewX(1deg); filter: contrast(1.2); }
+  18.5%, 54.9% { transform: translate(0, 0) skewX(0deg) scale(1); filter: hue-rotate(0deg) contrast(1) brightness(1); }
+  55.0% { transform: translate(-15px, 6px) skewX(-8deg) scale(1.03); filter: hue-rotate(-90deg) contrast(2) brightness(1.4); }
+  55.7% { transform: translate(1px, -1px); filter: none; }
+  56.4% { transform: translate(10px, -5px) skewX(5deg) scale(1.02); filter: hue-rotate(-180deg) contrast(1.6); }
+  57.1% { transform: translate(-1px, 2px); filter: contrast(1.1); }
+  57.8% { transform: translate(-6px, 4px) skewX(-3deg) scale(1.02); filter: hue-rotate(-45deg) contrast(1.4); }
+  58.5% { transform: translate(0, 0); filter: none; }
+  59.9% { transform: translate(4px, -2px) skewX(2deg); filter: contrast(1.2); }
+  62.0%, 100% { transform: translate(0, 0) skewX(0deg) scale(1); filter: hue-rotate(0deg) contrast(1) brightness(1); }
 }
 
-/* SVG ZICK-ZACK BLITZE SETUP */
+/* ==================================================================
+   SVG BLITZE
+================================================================== */
 .lightning-container {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: 15;
@@ -240,10 +159,9 @@
   left: 28%;
   width: 45vw;
   stroke: #ffffff;
-  filter: drop-shadow(0 0 6px var(--tiffany))
-    drop-shadow(0 0 20px var(--tiffany)) drop-shadow(0 0 45px var(--tiffany))
-    drop-shadow(0 0 95px var(--tiffany)) drop-shadow(0 0 150px var(--purple))
-    url(#lightning-distortion);
+  filter: drop-shadow(0 0 6px var(--tiffany)) drop-shadow(0 0 20px var(--tiffany))
+    drop-shadow(0 0 45px var(--tiffany)) drop-shadow(0 0 95px var(--tiffany))
+    drop-shadow(0 0 150px var(--purple)) url(#lightning-distortion);
   animation: strike-svg-main 9s infinite linear;
 }
 
@@ -267,141 +185,59 @@
   width: 25vw;
   stroke: #ffffff;
   stroke-width: 4px;
-  filter: drop-shadow(0 0 5px var(--neon-pink))
-    drop-shadow(0 0 18px var(--neon-pink)) drop-shadow(0 0 40px var(--tiffany))
-    drop-shadow(0 0 90px var(--ultraviolet)) url(#lightning-distortion);
+  filter: drop-shadow(0 0 5px var(--neon-pink)) drop-shadow(0 0 18px var(--neon-pink))
+    drop-shadow(0 0 40px var(--tiffany)) drop-shadow(0 0 90px var(--ultraviolet))
+    url(#lightning-distortion);
   stroke-dasharray: 1200;
   stroke-dashoffset: 1200;
   animation: strike-svg-branch 9s infinite linear;
 }
 
 @keyframes strike-svg-main {
-  0%,
-  7.9% {
-    opacity: 0;
-  }
-  8%,
-  18% {
-    opacity: 1;
-  }
-  19%,
-  100% {
-    opacity: 0;
-  }
+  0%, 7.9% { opacity: 0; }
+  8%, 18% { opacity: 1; }
+  19%, 100% { opacity: 0; }
 }
 
 @keyframes flash-stream {
-  0%,
-  7.9% {
-    stroke-dashoffset: 1200;
-    opacity: 0;
-  }
-  8% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  8.7% {
-    opacity: 0.1;
-  }
-  9.4% {
-    opacity: 0.95;
-  }
-  10.1% {
-    opacity: 0.2;
-  }
-  10.8% {
-    opacity: 1;
-  }
-  11.5% {
-    opacity: 0;
-  }
-  12.2% {
-    opacity: 0.8;
-  }
-  13.6% {
-    opacity: 0.1;
-  }
-  15% {
-    opacity: 0.6;
-  }
-  18%,
-  100% {
-    stroke-dashoffset: 1200;
-    opacity: 0;
-  }
+  0%, 7.9% { stroke-dashoffset: 1200; opacity: 0; }
+  8% { stroke-dashoffset: 0; opacity: 1; }
+  8.7% { opacity: 0.1; }
+  9.4% { opacity: 0.95; }
+  10.1% { opacity: 0.2; }
+  10.8% { opacity: 1; }
+  11.5% { opacity: 0; }
+  12.2% { opacity: 0.8; }
+  13.6% { opacity: 0.1; }
+  15% { opacity: 0.6; }
+  18%, 100% { stroke-dashoffset: 1200; opacity: 0; }
 }
 
 @keyframes flash-branches {
-  0%,
-  8% {
-    stroke-dashoffset: 800;
-    opacity: 0;
-  }
-  8.2% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  9% {
-    opacity: 0.1;
-  }
-  9.5% {
-    opacity: 0.85;
-  }
-  10.4% {
-    opacity: 0;
-  }
-  11.1% {
-    opacity: 0.7;
-  }
-  12.5%,
-  100% {
-    stroke-dashoffset: 800;
-    opacity: 0;
-  }
+  0%, 8% { stroke-dashoffset: 800; opacity: 0; }
+  8.2% { stroke-dashoffset: 0; opacity: 1; }
+  9% { opacity: 0.1; }
+  9.5% { opacity: 0.85; }
+  10.4% { opacity: 0; }
+  11.1% { opacity: 0.7; }
+  12.5%, 100% { stroke-dashoffset: 800; opacity: 0; }
 }
 
 @keyframes strike-svg-branch {
-  0%,
-  54.9% {
-    stroke-dashoffset: 1200;
-    opacity: 0;
-  }
-  55% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-    stroke-width: 7px;
-  }
-  55.7% {
-    stroke-dashoffset: 0;
-    opacity: 0.1;
-  }
-  56.4% {
-    stroke-dashoffset: 0;
-    opacity: 0.9;
-    stroke-width: 4px;
-  }
-  57.1% {
-    stroke-dashoffset: 0;
-    opacity: 0.3;
-  }
-  57.8% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  58.5% {
-    stroke-dashoffset: 0;
-    opacity: 0;
-  }
-  59.9% {
-    opacity: 0.6;
-  }
-  62%,
-  100% {
-    stroke-dashoffset: 1200;
-    opacity: 0;
-  }
+  0%, 54.9% { stroke-dashoffset: 1200; opacity: 0; }
+  55% { stroke-dashoffset: 0; opacity: 1; stroke-width: 7px; }
+  55.7% { stroke-dashoffset: 0; opacity: 0.1; }
+  56.4% { stroke-dashoffset: 0; opacity: 0.9; stroke-width: 4px; }
+  57.1% { stroke-dashoffset: 0; opacity: 0.3; }
+  57.8% { stroke-dashoffset: 0; opacity: 1; }
+  58.5% { stroke-dashoffset: 0; opacity: 0; }
+  59.9% { opacity: 0.6; }
+  62%, 100% { stroke-dashoffset: 1200; opacity: 0; }
 }
 
+/* ==================================================================
+   TITEL + NEON-BLINK
+================================================================== */
 .neon-blink-tiffany {
   color: var(--tiffany);
   font-family: "DotGothic16", sans-serif;
@@ -410,125 +246,41 @@
 }
 
 @keyframes blink {
-  0% {
-    opacity: 0.4;
-    text-shadow: 0 0 2px var(--tiffany);
-  }
-  100% {
-    opacity: 1;
-    text-shadow:
-      0 0 12px var(--tiffany),
-      0 0 20px var(--purple);
-  }
+  0% { opacity: 0.4; text-shadow: 0 0 2px var(--tiffany); }
+  100% { opacity: 1; text-shadow: 0 0 12px var(--tiffany), 0 0 20px var(--purple); }
 }
 
-/* Street Fighter 2 Text-Effekt Emulation */
 .sf-arcade-title {
   display: inline-block;
-
-  /* Wir fügen url(#brush-edges) zu deinen bestehenden Schatten hinzu! */
   filter: drop-shadow(5px 5px 0px #05010c) drop-shadow(-2px -2px 0px #05010c)
-    drop-shadow(0px 0px 20px rgba(148, 0, 211, 0.7)) url(#brush-edges); /* <-- Das zaubert die Pinselkanten! */
-
+    drop-shadow(0px 0px 20px rgba(148, 0, 211, 0.7)) url(#brush-edges);
   transform: skewX(-6deg) scaleY(1.05);
 }
-/* Spezieller Hover-Glitch für die Arcade-Buttons */
+
+/* ==================================================================
+   BUTTON HOVER-GLITCH (einmalig definiert)
+================================================================== */
 @keyframes buttonHoverGlitch {
-  0% {
-    border-color: var(--tiffany);
-    color: var(--tiffany);
-    box-shadow: 4px 4px 0px var(--purple);
-    transform: skewX(-12deg) translate(0, 0);
-  }
-  20% {
-    border-color: var(--purple);
-    color: var(--purple);
-    box-shadow: -3px 2px 10px var(--tiffany);
-    transform: skewX(-10deg) translate(-2px, 1px);
-  }
-  40% {
-    border-color: var(--tiffany);
-    color: #ffffff;
-    box-shadow: 5px -2px 15px var(--purple);
-    transform: skewX(-14deg) translate(1px, -1px);
-  }
-  60% {
-    border-color: var(--purple);
-    color: var(--tiffany);
-    box-shadow: -4px -4px 0px var(--tiffany);
-    transform: skewX(-12deg) translate(-1px, -2px);
-  }
-  80% {
-    border-color: var(--tiffany);
-    color: var(--purple);
-    box-shadow: 6px 3px 12px var(--purple);
-    transform: skewX(-13deg) translate(2px, 2px);
-  }
-  100% {
-    border-color: var(--tiffany);
-    color: var(--tiffany);
-    box-shadow: 4px 4px 0px var(--purple);
-    transform: skewX(-12deg) translate(0, 0);
-  }
+  0% { border-color: var(--tiffany); color: var(--purple); box-shadow: 4px 4px 0px var(--purple); transform: skewX(-12deg) translate(0, 0); }
+  20% { border-color: var(--purple); color: var(--tiffany); box-shadow: -3px 2px 10px var(--purple); transform: skewX(-10deg) translate(-2px, 1px); }
+  40% { border-color: var(--tiffany); color: #ffffff; box-shadow: 5px -2px 15px var(--tiffany); transform: skewX(-14deg) translate(1px, -1px); }
+  60% { border-color: var(--purple); color: var(--purple); box-shadow: -4px -4px 0px var(--tiffany); transform: skewX(-12deg) translate(-1px, -2px); }
+  80% { border-color: var(--tiffany); color: var(--tiffany); box-shadow: 6px 3px 12px var(--purple); transform: skewX(-13deg) translate(2px, 2px); }
+  100% { border-color: var(--tiffany); color: var(--purple); box-shadow: 4px 4px 0px var(--purple); transform: skewX(-12deg) translate(0, 0); }
 }
 
-/* Die Klasse, die wir per Tailwind-Hover ansteuern */
 .btn-hover-glitch:hover {
   animation: buttonHoverGlitch 0.47s infinite linear;
 }
-/* Spezieller Hover-Glitch für die Arcade-Buttons (Rahmen bleibt türkis, Schrift lila) */
-@keyframes buttonHoverGlitch {
-  0% {
-    border-color: var(--tiffany);
-    color: var(--purple);
-    box-shadow: 4px 4px 0px var(--purple);
-    transform: skewX(-12deg) translate(0, 0);
-  }
-  20% {
-    border-color: var(--purple);
-    color: var(--tiffany);
-    box-shadow: -3px 2px 10px var(--purple);
-    transform: skewX(-10deg) translate(-2px, 1px);
-  }
-  40% {
-    border-color: var(--tiffany);
-    color: #ffffff;
-    box-shadow: 5px -2px 15px var(--tiffany);
-    transform: skewX(-14deg) translate(1px, -1px);
-  }
-  60% {
-    border-color: var(--purple);
-    color: var(--purple);
-    box-shadow: -4px -4px 0px var(--tiffany);
-    transform: skewX(-12deg) translate(-1px, -2px);
-  }
-  80% {
-    border-color: var(--tiffany);
-    color: var(--tiffany);
-    box-shadow: 6px 3px 12px var(--purple);
-    transform: skewX(-13deg) translate(2px, 2px);
-  }
-  100% {
-    border-color: var(--tiffany);
-    color: var(--purple);
-    box-shadow: 4px 4px 0px var(--purple);
-    transform: skewX(-12deg) translate(0, 0);
-  }
-}
-/* --------------------------------------------------
-   DIGITALER REGEN-EFFEKT (TÜRKIS & TRANSPARENT-LILA)
--------------------------------------------------- */
+
+/* ==================================================================
+   DIGITALER REGEN (türkis + lila)
+================================================================== */
 @keyframes cyberRain {
-  0% {
-    /* Angepasst auf -380px, damit die langen Tropfen flüssig von oben reinkommen */
-    transform: translateY(-380px);
-  }
-  100% {
-    transform: translateY(110vh);
-  }
+  0% { transform: translateY(-380px); }
+  100% { transform: translateY(110vh); }
 }
 
-/* Gemeinsame Basis für alle Tropfen (Länge und Speed aus deinem Code) */
 .rain-drop {
   position: absolute;
   top: 0;
@@ -537,28 +289,27 @@
   animation: cyberRain infinite linear;
 }
 
-/* Spezifisch für die originalen blauen Tropfen (Exakt deine Werte!) */
 .rain-tiffany {
   background: linear-gradient(to bottom, rgba(0, 243, 255, 0) 0%, #00f3ff 100%);
   filter: drop-shadow(0 0 5px #00f3ff);
   opacity: 0.6;
 }
 
-/* Spezifisch für die neuen lila Tropfen (Transparenter eingestellt auf 0.3) */
 .rain-purple {
   background: linear-gradient(to bottom, rgba(148, 0, 211, 0) 0%, #9400d3 100%);
   filter: drop-shadow(0 0 4px #9400d3);
-  opacity: 0.3; /* Schön dezent im Hintergrund */
+  opacity: 0.3;
 }
-/* --------------------------------------------------
+
+/* ==================================================================
    PERMANENTES HINTERGRUND-FLIMMERN (SKY AMBIENT)
--------------------------------------------------- */
+================================================================== */
 .ambient-sky-flicker {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 2; /* Liegt genau über dem Schwarz, blendet sich in die Deckkraft ein */
+  z-index: 2;
   pointer-events: none;
   background: radial-gradient(
     circle at 50% 30%,
@@ -570,138 +321,56 @@
 }
 
 @keyframes skyFlicker {
-  0%,
-  100% {
-    opacity: 0.3;
-    filter: brightness(1);
-  }
-  7% {
-    opacity: 0.4;
-    filter: brightness(1.1);
-  }
-  9% {
-    opacity: 0.9;
-    filter: brightness(1.6);
-  } /* Kurzer Peak */
-  11% {
-    opacity: 0.3;
-    filter: brightness(0.9);
-  }
-  13% {
-    opacity: 0.7;
-    filter: brightness(1.3);
-  } /* Doppel-Zucken */
-  15% {
-    opacity: 0.4;
-    filter: brightness(1);
-  }
-  45% {
-    opacity: 0.3;
-  }
-  47% {
-    opacity: 0.8;
-    filter: brightness(1.5);
-  } /* Zweiter kleinerer Wetterleuchten-Peak */
-  49% {
-    opacity: 0.4;
-  }
-  51% {
-    opacity: 0.6;
-  }
-  53% {
-    opacity: 0.3;
-  }
+  0%, 100% { opacity: 0.3; filter: brightness(1); }
+  7% { opacity: 0.4; filter: brightness(1.1); }
+  9% { opacity: 0.9; filter: brightness(1.6); }
+  11% { opacity: 0.3; filter: brightness(0.9); }
+  13% { opacity: 0.7; filter: brightness(1.3); }
+  15% { opacity: 0.4; filter: brightness(1); }
+  45% { opacity: 0.3; }
+  47% { opacity: 0.8; filter: brightness(1.5); }
+  49% { opacity: 0.4; }
+  51% { opacity: 0.6; }
+  53% { opacity: 0.3; }
 }
 
-/* --------------------------------------------------
-   DIGITALER REGEN-EFFEKT (TÜRKIS & TRANSPARENT-LILA)
--------------------------------------------------- */
-@keyframes cyberRain {
-  0% {
-    transform: translateY(-380px);
-  }
-  100% {
-    transform: translateY(110vh);
-  }
+/* ==================================================================
+   SOCIAL-ICONS (datengetriebene Hover-Farbe via --icon-color)
+================================================================== */
+.social-icon:hover {
+  background-color: var(--icon-color);
+  color: #05010c;
+  box-shadow: 0 0 20px var(--icon-color);
 }
 
-/* Gemeinsame Basis für alle Tropfen */
-.rain-drop {
-  position: absolute;
-  top: 0;
-  width: 3px;
-  height: 370px;
-  animation: cyberRain infinite linear;
-}
-
-/* Spezifisch für die originalen blauen Tropfen */
-.rain-tiffany {
-  background: linear-gradient(to bottom, rgba(0, 243, 255, 0) 0%, #00f3ff 100%);
-  filter: drop-shadow(0 0 5px #00f3ff);
-  opacity: 0.6;
-}
-
-/* Spezifisch für die neuen lila Tropfen */
-.rain-purple {
-  background: linear-gradient(to bottom, rgba(148, 0, 211, 0) 0%, #9400d3 100%);
-  filter: drop-shadow(0 0 4px #9400d3);
-  opacity: 0.3;
-}
-/* --------------------------------------------------
-   JAPANISCHER CYBER-MATRIX-REGEN (ULTRA-STABILES SPUREN-SYSTEM)
--------------------------------------------------- */
+/* ==================================================================
+   JAPANISCHER MATRIX-REGEN (Spalten via Prozent, nie am absoluten Rand)
+================================================================== */
 @keyframes matrixFall {
-  0% {
-    transform: translateY(-120%) scale(0.8);
-  }
-  50% {
-    transform: translateY(40vh) scale(1.1);
-  }
-  100% {
-    transform: translateY(115vh) scale(0.9);
-  }
+  0% { transform: translateY(-120%) scale(0.8); }
+  50% { transform: translateY(40vh) scale(1.1); }
+  100% { transform: translateY(115vh) scale(0.9); }
 }
 
 @keyframes matrixGhostBlink {
-  0%,
-  100% {
-    opacity: 0;
-    filter: brightness(0.5) blur(2px);
-  }
-  25% {
-    opacity: 0.45;
-    filter: brightness(2.5) blur(0px);
-    text-shadow:
-      0 0 4px currentColor,
-      0 0 12px currentColor,
-      0 0 30px currentColor;
-  }
-  50% {
-    opacity: 0.05;
-    filter: brightness(0.5) blur(3px);
-  }
-  75% {
-    opacity: 0.35;
-    filter: brightness(1.8) blur(0px);
-    text-shadow: 0 0 6px currentColor;
-  }
+  0%, 100% { opacity: 0; filter: brightness(0.5) blur(2px); }
+  25% { opacity: 0.4; filter: brightness(1.6) blur(0px); text-shadow: 0 0 3px currentColor, 0 0 7px currentColor; }
+  50% { opacity: 0.05; filter: brightness(0.5) blur(3px); }
+  75% { opacity: 0.35; filter: brightness(1.4) blur(0px); text-shadow: 0 0 5px currentColor; }
 }
 
-/* Jede Spalte verhält sich jetzt wie ein fester, unbeweglicher Schacht */
 .matrix-column {
   position: absolute;
   top: 0;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert die Zeichen perfekt in ihrer Spur */
-  width: 55px; /* Feste Spurbreite: Verhindert jegliches Abschneiden am Rand */
+  align-items: center;
+  width: 55px;
   text-align: center;
   line-height: 1.1;
   font-weight: 900;
-  transform-origin: center center; /* Skaliert absolut sauber aus der Spurenmitte */
-  animation:
-    matrixFall infinite linear,
-    matrixGhostBlink infinite ease-in-out;
+  transform-origin: center center;
+  animation: matrixFall infinite linear, matrixGhostBlink infinite ease-in-out;
 }
 
 .matrix-column span {
@@ -709,9 +378,5 @@
   width: 100%;
 }
 
-.matrix-tiffany {
-  color: var(--tiffany);
-}
-.matrix-purple {
-  color: var(--purple);
-}
+.matrix-tiffany { color: var(--tiffany); }
+.matrix-purple { color: var(--purple); }
