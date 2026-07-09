@@ -702,3 +702,44 @@ body {
 .matrix-purple {
   color: var(--purple);
 }
+/* ==================================================================
+   TITEL-BUTTON (Der mechanische Arcade-Schalter)
+================================================================== */
+.glitch-button-wrapper {
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+  /* Die sanfte Transformation für den Druckeffekt */
+  transition: transform 0.2s ease-in-out;
+  display: inline-block;
+  will-change: transform;
+}
+
+.glitch-button-wrapper:hover {
+  transform: scale(1.05); /* Lupeneffekt */
+}
+
+.glitch-button-wrapper:active {
+  transform: scale(0.92) !important; /* Mechanisches Reindrücken */
+  transition: transform 0.2s ease-in-out !important;
+}
+
+/* Der Inhalt, der den Glitch-Effekt behält */
+.glitch-content {
+  display: inline-block;
+  /* Hier läuft deine Animation weiter, völlig unbeeindruckt vom Druckeffekt */
+  animation: globalTextGlitchSync 9s infinite linear !important;
+}
+/* Den Glitch beim Klicken kurz "aufwecken" */
+.glitch-button-wrapper:active .glitch-content {
+  /* Wir beschleunigen die Animation beim Klick kurz, um den Effekt zu triggern */
+  animation: globalTextGlitchSync 0.2s linear forwards !important;
+}
+
+/* Danach geht es normal weiter */
+.glitch-content {
+  display: inline-block;
+  animation: globalTextGlitchSync 9s infinite linear;
+}

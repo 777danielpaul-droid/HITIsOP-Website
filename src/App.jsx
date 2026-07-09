@@ -262,15 +262,20 @@ export default function App() {
         </svg>
       </div>
 
-      {/* 7. Titel */}
-      <header className="glitch-text-wrapper relative mt-8 md:mt-12 text-center z-10 select-none px-2">
-        <h1 className="sf-arcade-title text-5xl sm:text-6xl md:text-8xl italic tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#00f3ff] to-[#9400d3] scale-y-125 md:scale-x-200 md:scale-y-150 origin-center inline-block whitespace-nowrap">
-          HIT IS OP
-        </h1>
-        <p className="neon-blink-tiffany mt-8 md:mt-12 text-xs md:text-sm font-dotgothic">
-          Aura // Over 9K
-        </p>
-      </header>
+      {/* 7. Titel als Button */}
+      <button
+        onClick={() => console.log("Titel-Aktion ausgelöst!")}
+        className="glitch-button-wrapper relative mt-8 md:mt-12 text-center z-10 select-none px-2"
+      >
+        <div className="glitch-content">
+          <h1 className="sf-arcade-title text-5xl sm:text-6xl md:text-8xl italic tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#00f3ff] to-[#9400d3] scale-y-125 md:scale-x-200 md:scale-y-150 origin-center inline-block whitespace-nowrap">
+            HIT IS OP
+          </h1>
+          <p className="neon-blink-tiffany mt-8 md:mt-12 text-xs md:text-sm font-dotgothic">
+            Aura // Over 9K
+          </p>
+        </div>
+      </button>
 
       {/* 8. Buttons */}
       <main className="relative z-10 flex flex-col items-center gap-5 w-full max-w-[260px] sm:max-w-md mt-[15vh] md:mt-[25vh]">
