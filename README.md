@@ -6,7 +6,7 @@
 
 ## 🌐 Live Demo
 
-**[Play on itch.io →](https://coldasic3.itch.io/h1tisop)**
+**https://hit-is-op-website-21oxq4fg0-chozen-core.vercel.app**
 
 ---
 
@@ -22,15 +22,19 @@
 ## ✨ Key Features
 
 ### 🌌 **Cyberpunk Visual Effects**
+
 Multiple layered canvas effects including CRT scanlines, glitch backgrounds, lightning bolts, and particle rain — all rendered with pure CSS and SVG animations.
 
 ### 🍥 **Matrix-Style Digital Rain**
+
 Japanese character rain effect with türkis and lila cyberpunk characters flowing down the screen in responsive columns.
 
 ### ⚡ **Lightning Bolt System**
+
 SVG-based lightning effects with turbulence filters for realistic electrical distortions — creating a dynamic, living background.
 
 ### 🎮 **Retro Arcade UI**
+
 Pixel-perfect arcade button components with sound toggle, linking to your Scratch, Unity, and Rage games.
 
 ---
@@ -45,6 +49,7 @@ Built with a **modern React + Vite architecture** featuring:
 - **Modular component system**: `App.jsx` + `ArcadeButton.jsx`
 
 The app follows a **layered rendering approach**:
+
 1. CRT Scanlines (background)
 2. Ambient Flicker (base layer)
 3. Cyberpunk Rain (türkis + lila)
