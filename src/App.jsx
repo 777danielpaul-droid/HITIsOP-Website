@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import ArcadeButton from "./ArcadeButton";
 
 /* ------------------------------------------------------------------
@@ -124,24 +124,10 @@ const SOCIALS = [
 
 export default function App() {
   const [isMuted, setIsMuted] = useState(true);
-  const audioRef = useRef(null);
-
-  useEffect(() => {
-    audioRef.current = new Audio("/bg-music.mp3");
-    audioRef.current.loop = true;
-    return () => audioRef.current?.pause();
-  }, []);
 
   const toggleSound = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (isMuted) {
-      audio.play().catch((err) => console.log("Audio blockiert:", err));
-      setIsMuted(false);
-    } else {
-      audio.pause();
-      setIsMuted(true);
-    }
+    setIsMuted(!isMuted);
+    console.log("Sound-Toggle (Audio noch nicht implementiert)");
   };
 
   return (
