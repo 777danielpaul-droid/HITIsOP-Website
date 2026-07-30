@@ -3,6 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
+// Set favicon dynamically with base path
+const favicon = document.querySelector('link[rel="icon"]')
+if (favicon) {
+  favicon.href = `${import.meta.env.BASE_URL}favicon.svg`
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

@@ -175,7 +175,7 @@ export default function App() {
       {/* 5. Glitch-Hintergrundbild */}
       <div className="glitch-bg" aria-hidden="true">
         <img
-          src="/cover.png"
+          src={`${import.meta.env.BASE_URL}cover.png`}
           alt="Arcade Background"
           className="w-full h-full object-cover object-center opacity-60"
         />
