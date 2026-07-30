@@ -616,24 +616,46 @@ body {
    SOCIAL-ICONS (Glow & Scale ohne Ausfüllen)
 ================================================================== */
 .social-icon {
-  /* Basis-Zustand */
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  background-color: transparent !important; /* Erzwingt, dass der Hintergrund transparent bleibt */
+  background-color: transparent !important;
 }
 
 .social-icon:hover {
-  /* Kein background-color Wechsel mehr! */
-
-  /* Aufblasen */
   transform: scale(1.3) skewX(-12deg);
-
-  /* Helligkeit hochdrehen (lässt das Icon "strahlen") */
   filter: brightness(2) drop-shadow(0 0 10px var(--icon-color));
-
-  /* Rahmen leuchtet ebenfalls mit */
   box-shadow: 0 0 20px var(--icon-color);
-
   z-index: 20;
+}
+
+/* Theme-spezifische Farben als CSS-Variablen */
+.social-youtube {
+  --icon-color: #a133ff;
+  --border-color: #7a00cc;
+  --glow-color: rgba(122, 0, 204, 0.3);
+}
+
+.social-tiktok {
+  --icon-color: #00f3ff;
+  --border-color: #00f3ff;
+  --glow-color: rgba(0, 243, 255, 0.3);
+}
+
+.social-x {
+  --icon-color: #9400d3;
+  --border-color: #9400d3;
+  --glow-color: rgba(148, 0, 211, 0.3);
+}
+
+.social-whatsapp {
+  --icon-color: #25D366;
+  --border-color: #25D366;
+  --glow-color: rgba(37, 211, 102, 0.3);
+}
+
+.social-icon {
+  border-color: var(--border-color);
+  color: var(--icon-color);
+  box-shadow: 0 0 10px var(--glow-color);
 }
 
 /* ==================================================================
@@ -726,20 +748,13 @@ body {
   transition: transform 0.2s ease-in-out !important;
 }
 
-/* Der Inhalt, der den Glitch-Effekt behält */
+/* Glitch-Text-Inhalt */
 .glitch-content {
   display: inline-block;
-  /* Hier läuft deine Animation weiter, völlig unbeeindruckt vom Druckeffekt */
   animation: globalTextGlitchSync 9s infinite linear !important;
 }
-/* Den Glitch beim Klicken kurz "aufwecken" */
-.glitch-button-wrapper:active .glitch-content {
-  /* Wir beschleunigen die Animation beim Klick kurz, um den Effekt zu triggern */
-  animation: globalTextGlitchSync 0.2s linear forwards !important;
-}
 
-/* Danach geht es normal weiter */
-.glitch-content {
-  display: inline-block;
-  animation: globalTextGlitchSync 9s infinite linear;
+/* Beim Klick kurz beschleunigen */
+.glitch-button-wrapper:active .glitch-content {
+  animation: globalTextGlitchSync 0.2s linear forwards !important;
 }
