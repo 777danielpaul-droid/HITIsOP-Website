@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://777danielpaul-droid.github.io/HITIsOP-Website",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
