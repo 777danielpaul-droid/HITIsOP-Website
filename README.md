@@ -6,7 +6,7 @@
 
 ## 🌐 Live Demo
 
-**https://hit-is-op-website-21oxq4fg0-chozen-core.vercel.app**
+*(https://777danielpaul-droid.github.io/HITIsOP-Website/)*
 
 ---
 
